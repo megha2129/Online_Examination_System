@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Evaluate Exam</h1>
+
+<form method="POST">
+    {% for response in responses %}
+    <div style="margin: 10px;">
+        <label>{{ response[1] }} (Answer: {{ response[2] }})</label>
+        <input type="number" name="marks_{{ response[0] }}" placeholder="Assign Marks" style="width: 100%; padding: 8px; margin: 5px 0;">
+    </div>
+    {% endfor %}
+    <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">
+        Submit Marks
+    </button>
+</form>
+{% endblock %}

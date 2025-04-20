@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Exam Management</h2>
+
+
+<a href="{{ url_for('dashboard', role='admin') }}"><button>Back to Dashboard</button></a>
+<br><br>
+<!-- Exam Table -->
+<table style="width: 100%; border-collapse: collapse; border: 1px solid #fdfdfd;">
+    <tr>
+        <th style="border: 1px solid #ffffff; padding: 8px; text-align: left;background-color: #f2f2f2;">Exam ID</th>
+        <th style="border: 1px solid #fdfdfd; padding: 8px; text-align: left;background-color: #f2f2f2;">Exam Name</th>
+        <th style="border: 1px solid #fdfdfd; padding: 8px; text-align: left;background-color: #f2f2f2;">Subject</th>
+        <th style="border: 1px solid #fdfdfd; padding: 8px; text-align: left;background-color: #f2f2f2;">Teacher</th>
+        <th style="border: 1px solid #fdfdfd; padding: 8px; text-align: left;background-color: #f2f2f2;">Total Marks</th>
+        <th style="border: 1px solid #fdfdfd; padding: 8px; text-align: left;background-color: #f2f2f2;">Exam Type</th>
+        <th style="border: 1px solid #fdfdfd; padding: 8px; text-align: left;background-color: #f2f2f2;">Actions</th>
+    </tr>
+    {% for exam in exams %}
+    <tr>
+        <td style="border: 1px solid #ffffff; padding: 8px;">{{ exam[0] }}</td>
+        <td style="border: 1px solid #fdfdfd; padding: 8px;">{{ exam[3] }}</td>
+        <td style="border: 1px solid #fdfdfd; padding: 8px;">{{ exam[1] }}</td>
+        <td style="border: 1px solid #fdfdfd; padding: 8px;">{{ exam[2] }}</td>
+        <td style="border: 1px solid #fdfdfd; padding: 8px;">{{ exam[4] }}</td>
+        <td style="border: 1px solid #fdfdfd; padding: 8px;">{{ exam[5] }}</td>
+        <td style="border: 1px solid #fdfdfd; padding: 8px;">
+            <a href="{{ url_for('edit_exam', exam_id=exam[0]) }}"><button>Edit</button></a>
+            <form action="{{ url_for('delete_exam', exam_id=exam[0]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete the exam: {{ exam[3] }}?');">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

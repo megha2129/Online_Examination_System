@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add New Notification</h2>
+
+<form method="POST">
+    <label for="user_id">User ID:</label>
+    <input type="text" id="user_id" name="user_id" required><br><br>
+    
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea><br><br>
+    
+    <label for="priority">Priority:</label>
+    <select id="priority" name="priority" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select><br><br>
+    
+    <button type="submit">Add Notification</button>
+</form>
+
+<a href="{{ url_for('view_notification') }}"><button>Back to Notifications</button></a>
+{% endblock %}

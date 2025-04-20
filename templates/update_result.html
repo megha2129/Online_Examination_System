@@ -1,0 +1,92 @@
+<style>
+    .container-box {
+        width: 50%;
+        margin: auto;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        background-color: #B03052;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .container-box label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .container-box select,
+    .container-box input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .container-box button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .container-box button:hover {
+      background-color: #0056b3;
+    }
+
+    h2 {
+      color: white;
+    }
+
+    .back-btn {
+        display: block;
+        width: 100%;
+        background-color: #28a745;
+        margin-bottom: 10px;
+    }
+
+    .back-btn:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="container-box">
+    <h2>Update Student Result</h2>
+
+    <a href="{{ url_for('dashboard', role='teacher') }}">
+        <button class="back-btn">Back to Dashboard</button>
+    </a>
+
+    <form action="{{ url_for('update_result') }}" method="POST">
+        <!-- Student Selection -->
+        <label for="student_id">Select Student:</label>
+        <select name="student_id" id="student_id" required>
+            <option value="" disabled selected>Choose a student</option>
+            {% for student in students %}
+            <option value="{{ student[0] }}">{{ student[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Exam Selection -->
+        <label for="exam_id">Select Exam:</label>
+        <select name="exam_id" id="exam_id" required>
+            <option value="" disabled selected>Choose an exam</option>
+            {% for exam in exams %}
+            <option value="{{ exam[0] }}">{{ exam[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Marks Input -->
+        <label for="marks_obtained">Enter Marks:</label>
+        <input type="number" name="marks_obtained" id="marks_obtained" min="0" max="100" required>
+
+        <button type="submit">Update Result</button>
+    </form>
+</div>

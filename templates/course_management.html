@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Course Management</h2>
+
+<a href="{{ url_for('add_course') }}"><button>Add New Course</button></a>
+<a href="{{ url_for('dashboard', role='admin') }}"><button>Back to Dashboard</button></a>
+
+<!-- Course Table -->
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <tr>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Course ID</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Course Name</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Actions</th>
+    </tr>
+    {% if courses %}
+        {% for course in courses %}
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ course[0] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ course[1] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+                <a href="{{ url_for('edit_course', course_id=course[0]) }}"><button>Edit</button></a>
+                 <form action="{{ url_for('delete_course', course_id=course[0]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Do you want to delete the course: {{ course[1] }}?');">
+                     <button type="submit">Delete</button>
+                 </form>
+            </td>
+        </tr>
+        {% endfor %}
+    {% else %}
+     <tr>
+        <td colspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: center;">No courses found</td>
+    </tr>
+    {% endif %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="dashboard">
+
+    <ul>
+        <li><a href="{{ url_for('view_course') }}">View Courses</a></li>
+        <li><a href="{{ url_for('view_subjects') }}">View Subjects</a></li>
+        <li><a href="{{ url_for('take_exams') }}">Take Exams</a></li>
+        <li><a href="{{ url_for('view_results') }}">View Results</a></li>
+        <li><a href="{{ url_for('give_feedback') }}">Feedback</a></li>
+        <li><a href="{{ url_for('view_student_notifications') }}">Notifications</a></li>
+    </ul>
+</div>
+{% endblock %}

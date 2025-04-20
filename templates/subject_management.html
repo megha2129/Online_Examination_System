@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Subject Management</h2>
+
+<!-- Add New Subject Button -->
+<a href="{{ url_for('add_subject') }}"><button>Add New Subject</button></a>
+<a href="{{ url_for('dashboard', role='admin') }}"><button>Back to Dashboard</button></a>
+<br><br>
+<!-- Subject Table with border -->
+<table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+    <tr style="background-color: #f2f2f2;">
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Subject ID</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Subject Name</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Subject Code</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Actions</th>
+    </tr>
+    {% if subjects %}
+        {% for subject in subjects %}
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ subject[0] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ subject[1] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ subject[2] }}</td> <!-- Display subject_code here -->
+            <td style="border: 1px solid #ddd; padding: 8px;">
+                <a href="{{ url_for('edit_subject', subject_id=subject[0]) }}"><button>Edit</button></a>
+                <form action="{{ url_for('delete_subject', subject_id=subject[0]) }}" method="POST" onsubmit="return confirm('Do you want to delete the subject: {{ subject[1] }}?');">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    {% else %}
+    <tr>
+        <td colspan="4" style="border: 1px solid #ddd; padding: 8px; text-align: center;">No subjects found</td>
+    </tr>
+    {% endif %}
+</table>
+{% endblock %}

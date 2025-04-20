@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Back to Dashboard Button -->
+<div style="text-align: center; margin: 20px;">
+    <a href="{{ url_for('dashboard', role='student') }}">
+        <button style="padding: 10px 20px; background-color: #bdd4e7; color: #000000; border: none; border-radius: 5px; cursor: pointer;">
+            Back to Dashboard
+        </button>
+    </a>
+</div>
+    <h1 style="text-align: center; margin-top: 20px;">Notifications</h1>
+    <table style="width: 70%; margin: 20px auto; border-collapse: collapse; border: 2px solid #ddd; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <tr style="background-color: #ffffff; color: #000000;">
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">Message</th>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">Priority</th>
+        </tr>
+        {% for notification in notifications %}
+        <tr style="background-color:-moz-only-whitespace {% if loop.index % 2 == 0 %} #f9f9f9 {% else %} #e9e9e9 {% endif %};">
+            <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ notification[0] }}</td>
+            <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ notification[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

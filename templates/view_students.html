@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>View Students</h2>
+<a href="{{ url_for('dashboard', role='teacher') }}"><button>Back to Dashboard</button></a>
+<br><br>
+
+{% if students %}
+    <table border="1" style="width: 70%; margin: 20px auto; text-align: left;">
+    <tr>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ student[0] }}</td>
+        <td>{{ student[1] }}</td>
+        <td>{{ student[2] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+    <p style="text-align: center;">No students enrolled in your subjects.</p>
+{% endif %}
+
+{% endblock %}

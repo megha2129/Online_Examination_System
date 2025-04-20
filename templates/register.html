@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body onload="showAlert('{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}')">
+    <div class="register_container">
+        <h1>Register</h1>
+        <form action="/register_user" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" name="username" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" required><br>
+
+    <label for="role">Role:</label>
+    <select name="role" required>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+    </select><br>
+
+    <button type="submit">Register</button>
+</form>
+        <a href="/">Already have an account? Login here</a>
+    </div>
+</body>
+</html>

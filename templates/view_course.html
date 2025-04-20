@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Available Courses</h1>
+<table style="width: 70%; margin: 20px auto; border-collapse: collapse;">
+    <tr style="background-color: #ffffff; color: black;">
+        <th style="border: 1px solid #ddd; padding: 10px; text-align: center;">Course ID</th>
+        <th style="border: 1px solid #ddd; padding: 10px; text-align: center;">Course Name</th>
+    </tr>
+    {% for course in courses %}
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ course[0] }}</td>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ course[1] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- Back to Dashboard Button -->
+<div style="text-align: center; margin: 20px;">
+    <a href="{{ url_for('dashboard', role='student') }}">
+        <button style="padding: 10px 20px; background-color: #bdd4e7; color: #000000; border: none; border-radius: 5px; cursor: pointer;">
+            Back to Dashboard
+        </button>
+    </a>
+</div>
+{% endblock %}
+

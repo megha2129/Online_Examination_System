@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ role }} Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #B03052;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h1 {
+            color: #fdfdfd;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        label, p {
+            font-size: 16px;
+            color: #fffdfd;
+            margin: 8px 0;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .password-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .toggle-password {
+            background: none;
+            border: none;
+            color: #B03052;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button {
+            background-color: #fff;
+            color: #B03052;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ role }} Profile</h1>
+
+        <form action="{{ url_for('update_profile') }}" method="POST" >
+            <label for="name">User Name:</label>
+            <input type="text" name="name" id="name" value="{{ user_name }}" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="{{ email }}" required>
+
+            <label>Password:</label>
+            <div class="password-container">
+                <input type="password" id="current-password" value="{{ password }}" readonly>
+                <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+            </div>
+
+            <label for="password">New Password (optional):</label>
+            <input type="password" name="password" id="password" placeholder="Enter new password if changing">
+
+            {% if role == 'student' %}
+                <p><strong>Student ID:</strong> {{ extra_id }}</p>
+                <p><strong>Course ID:</strong> {{ extra_id2 }}</p>
+                <p><strong>Enrollment Date:</strong> {{ extra_id3 }}</p>
+            {% elif role == 'teacher' %}
+                <p><strong>Teacher ID:</strong> {{ extra_id }}</p>
+                <p><strong>Subject ID:</strong> {{ extra_id2 }}</p>
+                <p><strong>Course ID:</strong> {{ extra_id3 }}</p>
+            {% elif role == 'admin' %}
+                <p><strong>Admin ID:</strong> {{ admin_id }}</p>
+            {% endif %}
+
+            <button type="submit" onsubmit="return confirm('Updated successfully')">Update Profile</button>
+        </form>
+
+        <br>
+        <a href="{{ url_for('dashboard', role=role) }}"><button>Back to Dashboard</button></a>
+    </div>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("current-password");
+            var toggleButton = document.querySelector(".toggle-password");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleButton.textContent = "Show";
+            }
+        }
+    </script>
+</body>
+</html>

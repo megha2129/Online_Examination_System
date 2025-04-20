@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>View Student Submissions</h2>
+    <a href="{{ url_for('dashboard', role='teacher') }}"><button>Back to Dashboard</button></a>
+
+    <form method="POST">
+        <label for="subject_id">Select Subject:</label>
+        <select name="subject_id" id="subject_id">
+            {% for subject in subjects %}
+                <option value="{{ subject[0] }}" {% if subject[0] == selected_subject %}selected{% endif %}>
+                    {{ subject[1] }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">View Submissions</button>
+    </form>
+
+    {% if submissions %}
+        <table border="1">
+            <tr>
+                <th>Student Name</th>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+            {% for submission in submissions %}
+            <tr>
+                <td>{{ submission[0] }}</td>
+                <td>{{ submission[1] }}</td>
+                <td>{{ submission[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No submissions found.</p>
+    {% endif %}
+
+{% endblock %}

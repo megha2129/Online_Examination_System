@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>User Management</h2>
+
+    <!-- Filter by Role Dropdown -->
+    <form method="GET" action="{{ url_for('user_management') }}">
+    <label for="roleFilter">Filter by Role: </label>
+    <select name="roleFilter" id="roleFilter" onchange="this.form.submit()">
+        <option value="">All</option>
+        <option value="admin" {% if request.args.get('roleFilter') == 'admin' %}selected{% endif %}>Admin</option>
+        <option value="teacher" {% if request.args.get('roleFilter') == 'teacher' %}selected{% endif %}>Teacher</option>
+        <option value="student" {% if request.args.get('roleFilter') == 'student' %}selected{% endif %}>Student</option>
+    </select>
+</form>
+
+    <!-- Add New User Button -->
+    <a href="{{ url_for('add_user') }}"><button>Add New User</button></a>
+
+    <!-- Back to Dashboard Button -->
+    <a href="{{ url_for('dashboard', role='admin') }}"><button>Back to Dashboard</button></a>
+    <br><br>
+
+    <!-- User Table -->
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #fdfdfd;">User ID</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Name</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Email</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Role</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2;">Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ user[0] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ user[1] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ user[2] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ user[3] }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+                {% if user[3] and user[3]|lower != 'admin' %}
+                <form action="{{ url_for('delete_user', user_id=user[0]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete user: {{ user[1] }}?');">
+                    <button type="submit">Delete</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

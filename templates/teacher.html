@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+    <li><a href="{{ url_for('assigned_subjects', teacher_id=session['teacher_id']) }}">Assigned Subjects</a></li>
+    <li><a href="{{ url_for('question_paper_submission', teacher_id=session['teacher_id']) }}">Question Paper Submission</a></li>
+    <li><a href="{{ url_for('view_submissions', teacher_id=session['teacher_id']) }}">View Submissions</a></li>
+    <li><a href="{{ url_for('view_students', teacher_id=session['teacher_id']) }}">View Students</a></li>
+    <li><a href="{{ url_for('update_result', teacher_id=session['teacher_id']) }}">Update Results</a></li>
+</ul>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Assigned Subjects</h1>
+<div style="text-align: center; margin: 20px;">
+    <a href="{{ url_for('dashboard', role='teacher') }}">
+        <button style="padding: 10px 20px; background-color: #bdd4e7; color: #000000; border: none; border-radius: 5px; cursor: pointer;">
+            Back to Dashboard
+        </button>
+    </a>
+</div>
+
+<table style="width: 70%; margin: 20px auto; border-collapse: collapse; border: 2px solid #ddd;">
+    <tr style="background-color: #f2f2f2;">
+        <th style="border: 1px solid #ddd; padding: 10px; text-align: center;">Subject ID</th>
+        <th style="border: 1px solid #ddd; padding: 10px; text-align: center;">Subject Name</th>
+    </tr>
+    {% for subject in subjects %}
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ subject[0] }}</td>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ subject[1] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

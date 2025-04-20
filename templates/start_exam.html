@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Start Exam</h1>
+
+<form method="POST">
+    {% for question in questions %}
+    <div style="margin: 10px;">
+        <label>{{ question[1] }}</label>
+        <input type="text" name="answer_{{ question[0] }}" placeholder="Your answer" style="width: 100%; padding: 8px; margin: 5px 0;">
+    </div>
+    {% endfor %}
+
+    <button type="submit" style="padding: 10px 20px; background-color: #0c5f97; color: white; border: none; border-radius: 5px;">
+        Submit Exam
+    </button>
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Question Paper Submission</h2>
+<a href="{{ url_for('dashboard', role='teacher') }}"><button>Back to Dashboard</button></a>
+<br><br>
+
+<form method="POST" style="width: 50%; margin: 20px auto;">
+    <label for="subject_id">Select Subject:</label>
+    <select name="subject_id" id="subject_id" required style="width: 100%; padding: 8px; margin: 5px 0;">
+        {% for subject in subjects %}
+            <option value="{{ subject[0] }}">{{ subject[1] }}</option>
+        {% endfor %}
+    </select><br>
+
+
+    <label for="exam_id">Select Exam:</label>
+    <select name="exam_id" id="exam_id" required style="width: 100%; padding: 8px; margin: 5px 0;">
+        {% for exam in exams %}
+            <option value="{{ exam[0] }}">{{ exam[1] }}</option>
+        {% endfor %}
+    </select><br>
+
+    <label for="question_text">Question Text:</label>
+    <textarea name="question_text" id="question_text" rows="4" required style="width: 100%; padding: 8px; margin: 5px 0;"></textarea><br>
+
+    <label for="answer_text">Answer Text:</label>
+    <textarea name="answer_text" id="answer_text" rows="4" required style="width: 100%; padding: 8px; margin: 5px 0;"></textarea><br>
+
+    <button type="submit" style="padding: 10px 20px; margin-top: 10px;">Submit</button>
+</form>
+
+{% endblock %}

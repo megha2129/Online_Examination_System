@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center; margin: 20px;">
+    <a href="{{ url_for('dashboard', role='student') }}">
+        <button style="padding: 10px 20px; background-color: #bdd4e7; color: #000000; border: none; border-radius: 5px; cursor: pointer;">
+            Back to Dashboard
+        </button>
+    </a>
+</div>
+
+<h1>Give Feedback</h1>
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div id="flash-message" class="{{ category }}" style="padding: 10px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; text-align: center; margin-bottom: 10px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+    {% endif %}
+{% endwith %}
+
+<form action="{{ url_for('give_feedback') }}" method="POST">
+    <textarea name="feedback_text" placeholder="Write your feedback here..." rows="5" cols="50"></textarea><br>
+    <button type="submit">Submit Feedback</button>
+</form>
+
+{% endblock %}

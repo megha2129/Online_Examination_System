@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" style="padding: 10px; background-color: #d4edda; color: #155724; border-radius: 5px; margin-bottom: 10px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+
+
+
+<h1>Take an Exam</h1>
+
+<!-- Back to Dashboard Button -->
+<div style="text-align: center; margin: 10px;">
+    <a href="{{ url_for('dashboard', role='student') }}">
+        <button style="padding: 8px 16px; background-color: #ffffff; color: #000000; border: none; border-radius: 5px; cursor: pointer;">
+            Back to Dashboard
+        </button>
+    </a>
+</div>
+
+<!-- Exams Table -->
+<table style="width: 70%; margin: 20px auto; border-collapse: collapse;">
+    <tr style="background-color: #ffffff; color: black;">
+        <th style="border: 1px solid #ddd; padding: 10px; text-align: center;">Exam ID</th>
+        <th style="border: 1px solid #ddd; padding: 10px; text-align: center;">Exam Name</th>
+        <th style="border: 1px solid #ddd; padding: 10px; text-align: center;">Subject ID</th>
+        <th style="border: 1px solid #ddd; padding: 10px; text-align: center;">Action</th>
+    </tr>
+    {% for exam in exams %}
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ exam[0] }}</td>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ exam[1] }}</td>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ exam[2] }}</td>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
+            <a href="{{ url_for('start_exam', exam_id=exam[0]) }}">
+                <button style="padding: 6px 12px; background-color: #BDD4E7; color: #000; border: none; border-radius: 5px; cursor: pointer;">
+                    Start Exam
+                </button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
